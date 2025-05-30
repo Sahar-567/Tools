@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image compression tool to optimize images with customizable compression levels. Reduce image size without losing quality for faster websites.">
+    <meta name="keywords" content="image compression, optimize images, reduce image size, image compressor, web performance, SEO image optimization">
+    <meta name="author" content="Image Compression Tool">
+    <meta name="robots" content="index, follow">
+    <title>Image Compressor - Optimize Images Online</title>
+    <!-- Tailwind CSS CDN with custom configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1D4ED8',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Image Compressor - Optimize Images Online">
+    <meta property="og:description" content="Compress images easily with customizable quality settings to improve website performance.">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+            crossorigin="anonymous"></script>
+    <style>
+        /* Custom styles for enhanced UI */
+        .gradient-bg {
+            background: linear-gradient(135deg, #1D4ED8, #3B82F6);
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 sticky top-0 z-10 shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">Image Compressor</h1>
+            <p class="mt-2 text-sm sm:text-base lg:text-lg opacity-90">Optimize your images with ease for faster websites</p>
+        </div>
+    </header>
+
+    <!-- Ad Space: Top Banner -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <ins class="adsbygoogle w-full h-24 sm:h-32 md:h-40"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="YOUR_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+        <div class="max-w-3xl mx-auto glassmorphism p-6 sm:p-8 rounded-2xl shadow-xl animate-fade-in">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 mb-6">Compress Your Image</h2>
+            <div class="space-y-6">
+                <!-- File Input -->
+                <div>
+                    <label for="imageInput" class="block text-sm font-medium text-gray-700 mb-2">Upload Image</label>
+                    <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-primary transition-colors">
+                        <input type="file" id="imageInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <p class="text-center text-gray-500">Drag & drop or click to upload an image</p>
+                    </div>
+                </div>
+                <!-- Compression Slider -->
+                <div>
+                    <label for="compressionLevel" class="block text-sm font-medium text-gray-700 mb-2">
+                        Compression Level: <span id="compressionValue" class="font-bold text-primary">50</span>%
+                    </label>
+                    <input type="range" id="compressionLevel" min="10" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary">
+                </div>
+                <!-- Compress Button -->
+                <button id="compressButton" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 hover-scale transition-colors">Compress Image</button>
+                <!-- Output Section -->
+                <div id="output" class="hidden mt-6 p-4 bg-white rounded-lg shadow-md animate-fade-in">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Compressed Image</h3>
+                    <img id="compressedImage" class="w-full h-auto rounded-lg mb-4" alt="Compressed Image">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <p class="text-sm">Original Size: <span id="originalSize" class="font-medium"></span></p>
+                        <p class="text-sm">Compressed Size: <span id="compressedSize" class="font-medium"></span></p>
+                    </div>
+                    <a id="downloadLink" class="mt-4 inline-block w-full text-center bg-secondary text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 hover-scale transition-colors">Download Compressed Image</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ad Space: Sidebar (Desktop) -->
+    <aside class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 hidden lg:block">
+        <div class="max-w-xs mx-auto">
+            <ins class="adsbygoogle w-full h-96"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-6 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-sm">© 2025 Image Compressor. All rights reserved.</p>
+            <nav class="mt-2 space-x-4">
+                <a href="/about" class="text-blue-200 hover:text-white transition-colors">About</a>
+                <a href="/privacy" class="text-blue-200 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms" class="text-blue-200 hover:text-white transition-colors">Terms of Service</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Image Compression -->
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const compressionLevel = document.getElementById('compressionLevel');
+        const compressionValue = document.getElementById('compressionValue');
+        const compressButton = document.getElementById('compressButton');
+        const output = document.getElementById('output');
+        const compressedImage = document.getElementById('compressedImage');
+        const originalSize = document.getElementById('originalSize');
+        const compressedSize = document.getElementById('compressedSize');
+        const downloadLink = document.getElementById('downloadLink');
+
+        compressionLevel.addEventListener('input', () => {
+            compressionValue.textContent = compressionLevel.value;
+        });
+
+        compressButton.addEventListener('click', async () => {
+            const file = imageInput.files[0];
+            if (!file) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            const quality = compressionLevel.value / 100;
+            const reader = new FileReader();
+
+            reader.onload = async (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    // Compress image
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                    compressedImage.src = compressedDataUrl;
+
+                    // Calculate sizes
+                    const originalBytes = file.size;
+                    const compressedBytes = Math.round(compressedDataUrl.length * 3 / 4); // Approximate base64 to bytes
+                    originalSize.textContent = `${(originalBytes / 1024).toFixed(2)} KB`;
+                    compressedSize.textContent = `${(compressedBytes / 1024).toFixed(2)} KB`;
+
+                    // Set download link
+                    downloadLink.href = compressedDataUrl;
+                    downloadLink.download = `compressed_${file.name}`;
+                    output.classList.remove('hidden');
+                };
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
